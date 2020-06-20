@@ -8,12 +8,14 @@ public class Ware {
 	private double mPreis; 
 	private LocalDate mVerfallsDatum;
 	private LocalDate mVerkausdatum;
+	private Bestellung mBestellung;
 	
 	public Ware(String pWarenName, double pPreis, LocalDate pVerfallsDatum) {
 		mWarenName =pWarenName;
 		mPreis=pPreis;
 		mVerfallsDatum=pVerfallsDatum;
 		mVerkausdatum=null;
+		mBestellung=null;
 	}
 	
 	public String getWarenname() {
@@ -34,6 +36,15 @@ public class Ware {
 	
 	public LocalDate getVerkausdatum() {
 		return mVerkausdatum;
+	}
+
+	public Bestellung getWarenbestellung() {
+		return mBestellung;
+	}
+
+	public void aktualisiereBestellung(String pWarenname,int pGrenze, int pAnzahlBestellung) {
+		mBestellung= new Bestellung(pWarenname, pGrenze, pAnzahlBestellung);
+		
 	}
 	
 	

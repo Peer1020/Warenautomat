@@ -25,14 +25,14 @@
   <!-- User: Some informations about the user.                                -->
   <User>
     <!-- UserName: Username of the user                                       -->
-    <UserName />
+    <UserName>Eisele</UserName>
     <!-- Password: Password of the user.                                      -->
     <Password>
       <!-- MD5 & PlainText: No plain text passwords are saved.                -->
       <!-- If a plain text password is found, it will be encrypted            -->
       <!-- to MD5 and stored. The plain text password will then               -->
       <!-- be deleted.                                                        -->
-      <MD5 />
+      <MD5>232e38b341397cf2a97923f2763d6b86</MD5>
       <PlainText />
     </Password>
   </User>

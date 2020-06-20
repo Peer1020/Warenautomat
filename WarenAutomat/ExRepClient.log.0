@@ -1,0 +1,45 @@
+ComPdCommandLinePars:INFO   :Logging to SysOut (console) enabled by command line argument
+ComPdCommandLinePars:INFO   :Logging to logfile enabled by command line argument
+ComPdCommandLinePars:INFO   :LogLevel set to FINER by command line argument
+CliPdUI             :INFO   :Timestamp: 18:39:47.423 - 18.06.2020
+CliPdUI             :INFO   :Starting ExRep-Client v3.0.0
+CliDmClientConfig   :INFO   :Loading client config from XML
+CliDmClientConfig   :FINER  :Loaded network data
+CliDmClientConfig   :FINER  :Loaded user data
+CliDmClientConfig   :FINER  :Loaded ranking data
+CliDmClientConfig   :FINER  :Loaded log module "client" with level "OFF"
+CliDmClientConfig   :FINER  :Loaded logging data
+CliDmClientConfig   :INFO   :XML client config file successfully saved
+CliDmClientConfig   :INFO   :XML client config file successfully saved
+CliDmClientConfig   :INFO   :XML client config file successfully saved
+CliNtServerConnectio:FINER  :Found an ExRep-Server on port 40001
+CliNtServerConnectio:SEVERE :Password not ok.
+CliPdUI             :WARNING:Could not login, to test connection and download exercises
+CliNtServerConnectio:FINER  :Found an ExRep-Server on port 40009
+CliNtServerConnectio:SEVERE :Password not ok.
+CliPdUI             :WARNING:Could not login, to change password
+CliNtServerConnectio:FINER  :Found an ExRep-Server on port 40001
+CliNtServerConnectio:SEVERE :Password not ok.
+CliPdUI             :WARNING:Could not login, to test connection and download exercises
+CliNtServerConnectio:FINER  :Found an ExRep-Server on port 40001
+CliNtServerConnectio:SEVERE :Password not ok.
+CliPdUI             :WARNING:Could not login, to test connection and download exercises
+CliDmClientConfig   :INFO   :XML client config file successfully saved
+CliDmClientConfig   :INFO   :XML client config file successfully saved
+CliNtServerConnectio:FINER  :Found an ExRep-Server on port 40001
+CliPdUI             :FINE   :Sucessfully connected to server
+CliNtServerConnectio:FINER  :Found an ExRep-Server on port 40001
+ComDmFileTransfer   :INFO   :Setting file "DynamicUploadWarenautomat.class" success
+ComDmFileTransfer   :INFO   :Write file "/home/peer/Desktop/mas_warenautomat/WarenAutomat/exrep/client/warenautomat/checkin/DynamicUploadWarenautomat.class" success
+CliNtServerConnectio:FINER  :Found an ExRep-Server on port 40001
+CliPdUI             :INFO   :Now starting dynamic class...
+ComPdDynamicClassLoa:INFO   :Dynamic class "DynamicUploadWarenautomat" loaded
+ComPdDynamicClassLoa:INFO   :Executing method "execute" of dynamic class...
+DynamicUploadWarenau:INFO   :execute() from DynamicUpload class running
+DynamicUploadWarenau:FINER  :FileList: [src/GuiTest.java.pdf, src/GuiTest.java, src/warenautomat/Automat.java, src/warenautomat/Muenzsaeule.java, src/warenautomat/Ware.java, src/warenautomat/Fach.java, src/warenautomat/Kasse.java, src/warenautomat/Drehteller.java, src/warenautomat/Statistik.java, src/warenautomat/Bestellung.java, src/warenautomat/src.pdf, src/WarenAutomatTest.java, src/WarenAutomatTest.java.pdf]
+DynamicUploadWarenau:FINE   :Creating ZIP-Archive: /home/peer/Desktop/mas_warenautomat/WarenAutomat/exrep/client/warenautomat/checkin/src.zip
+DynamicUploadWarenau:INFO   :Successfully uploaded all files needed for the exercise
+DynamicUploadWarenau:INFO   :execute() from DynamicUpload class stopped
+CliPdUI             :INFO   :execute() of dynamic upload class returned successfully
+CliPdUI             :INFO   :lastAnswer.size(): 1
+CliPdUI             :INFO   :result: >210 Process UID "warenautomat.checkin" successfully executed in 1224ms<

@@ -50,7 +50,7 @@ public class Automat {
 	public void neueWareVonBarcodeLeser(int pDrehtellerNr, String pWarenName, double pPreis, LocalDate pVerfallsDatum) {
 		if (pDrehtellerNr <= 7) {
 			mDrehteller[pDrehtellerNr - 1].fachAuffuelen(mDrehtellerposition, pWarenName, pPreis, pVerfallsDatum);
-			wechseleDrehteller(pDrehtellerNr-1);
+			wechseleDrehteller(pDrehtellerNr-1,false);
 		}
 
 	}
@@ -79,12 +79,12 @@ public class Automat {
 			mDrehtellerposition = 0;
 		}
 		for (int i = 0; i < NR_DREHTELLER; i++) {
-			wechseleDrehteller(i);
+			wechseleDrehteller(i,false);
 		}
 		
 	}
 
-	private void wechseleDrehteller(int pDrehtellernummer) {
+	private void wechseleDrehteller(int pDrehtellernummer, boolean pBestellen) {
 		Ware ware = getWarenPosition(pDrehtellernummer, mDrehtellerposition);
 		if (ware != null) {
 			SystemSoftware.zeigeWareInGui(pDrehtellernummer + 1, ware.getWarenname(), ware.getVerfallsDatum());
@@ -96,7 +96,9 @@ public class Automat {
 			SystemSoftware.zeigeWarenPreisAn(pDrehtellernummer + 1, 0.0);
 			SystemSoftware.zeigeVerfallsDatum(pDrehtellernummer + 1, 0);
 		}
-
+		if (pBestellen) {
+			pruefeWarenbestellung(pDrehtellernummer,mDrehtellerposition);
+		}
 	}
 	
 	
@@ -154,11 +156,38 @@ public class Automat {
 		ware.setVerkausdatum(SystemSoftware.gibAktuellesDatum());
 		mKasse.getStatistik().erfasseWarenbezug(ware);
 		fach.setWare(null);	
-		wechseleDrehteller(pDrehtellernummer-1);
+		wechseleDrehteller(pDrehtellernummer-1,true);
 		SystemSoftware.entriegeln(pDrehtellernummer);
 		return true;
 	}
 	
+
+	private boolean pruefeWarenbestellung(int pDrehtellernummer, int akutelleDrehtellerposition) {
+		Ware ware = getWarenPosition(pDrehtellernummer, akutelleDrehtellerposition);
+		if (ware != null&& ware.getWarenbestellung()!= null&& anzahlWare(ware.getWarenname()) <=
+				ware.getWarenbestellung().getGrenze()) {
+			SystemSoftware.bestellen(ware.getWarenname(), ware.getWarenbestellung().getBestellanzahl(),
+					anzahlWare(ware.getWarenname()));	
+			return true;						
+		}
+		return false;
+		
+		
+	}
+
+	private int anzahlWare(String warenname) {
+		int totalWaren = 0;
+		for (int i = 0; i < mDrehteller.length; i++) {
+			for (int j = 0; j < max_faecher; j++) {
+				Ware ware = getWarenPosition(i, j);
+				if(ware != null && !SystemSoftware.gibAktuellesDatum().isBefore(ware.getVerfallsDatum())){
+					totalWaren++;
+				}
+				
+			}
+		}
+		return totalWaren;
+	}
 
 	private boolean istGenugWechselgeldvorhanden(int pDrehtellernummer) {
 		return mKasse.istAusreichendWechselgeldVorhanden(getWarenPosition(
@@ -221,5 +250,36 @@ public class Automat {
 	public int gibVerkaufsStatistik(String pName, LocalDate pDatum) {
 		return mKasse.getStatistik().berechneAnzahlWaren(pName,pDatum);
 	}
+	
+	  /**
+	   * Konfiguration einer automatischen Bestellung. <br>
+	   * Der Automat setzt automatisch Bestellungen ab mittels
+	   * <code> SystemSoftware.bestellen() </code> wenn eine Ware ausgeht.
+	   * 
+	   * @param pWarenName
+	   *          Warenname derjenigen Ware, für welche eine automatische 
+	   *          Bestellung konfiguriert wird.
+	   * @param pGrenze
+	   *          Ab welcher Anzahl von verkaufbarer Ware jeweils eine 
+	   *          Bestellung abgesetzt werden soll.
+	   * @param pAnzahlBestellung
+	   *          Wieviele neue Waren jeweils bestellt werden sollen.
+	   */
+	  public void konfiguriereBestellung(String pWarenName, int pGrenze,
+	                                     int pAnzahlBestellung) {
+		  for (int i = 0; i < mDrehteller.length; i++) {
+			  for (int j = 0; j < max_faecher; j++) {
+				  Ware ware =getWarenPosition(i, j);
+				  if(ware!=null&&pWarenName.equals(ware.getWarenname())) {
+					  ware.aktualisiereBestellung(pWarenName,pGrenze,pAnzahlBestellung);
+				  }
+				
+			}
+			
+		}
+	    
+
+	  }
+	
 
 }
